@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #f0f0f0;
+        }
+        .calculator {
+            background-color: #2b2b2b;
+            padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .display {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            text-align: right;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            font-size: 2.5rem;
+            min-height: 5rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+        .btn {
+            background-color: #404040;
+            color: #f0f0f0;
+            font-size: 1.5rem;
+            font-weight: 500;
+            padding: 1rem;
+            border: none;
+            border-radius: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+        }
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .btn-orange {
+            background-color: #ff9500;
+            color: white;
+        }
+        .btn-gray {
+            background-color: #a6a6a6;
+            color: #1a1a1a;
+        }
+        .btn-wide {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        <div class="grid-container">
+            <button class="btn btn-gray" onclick="clearDisplay()">AC</button>
+            <button class="btn btn-gray" onclick="toggleSign()">+/-</button>
+            <button class="btn btn-gray" onclick="appendInput('%')">%</button>
+            <button class="btn btn-orange" onclick="appendInput('/')">/</button>
+            <button class="btn" onclick="appendInput('7')">7</button>
+            <button class="btn" onclick="appendInput('8')">8</button>
+            <button class="btn" onclick="appendInput('9')">9</button>
+            <button class="btn btn-orange" onclick="appendInput('*')">*</button>
+            <button class="btn" onclick="appendInput('4')">4</button>
+            <button class="btn" onclick="appendInput('5')">5</button>
+            <button class="btn" onclick="appendInput('6')">6</button>
+            <button class="btn btn-orange" onclick="appendInput('-')">-</button>
+            <button class="btn" onclick="appendInput('1')">1</button>
+            <button class="btn" onclick="appendInput('2')">2</button>
+            <button class="btn" onclick="appendInput('3')">3</button>
+            <button class="btn btn-orange" onclick="appendInput('+')">+</button>
+            <button class="btn btn-wide" onclick="appendInput('0')">0</button>
+            <button class="btn" onclick="appendInput('.')">.</button>
+            <button class="btn btn-orange" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        let currentInput = '0';
+        let operator = null;
+        let firstOperand = null;
+        let isNewInput = true;
+
+        function updateDisplay() {
+            display.textContent = currentInput;
+        }
+
+        function appendInput(value) {
+            if (isNewInput) {
+                currentInput = (value === '.') ? '0.' : value;
+                isNewInput = false;
+            } else {
+                if (value === '.' && currentInput.includes('.')) {
+                    return;
+                }
+                currentInput += value;
+            }
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            operator = null;
+            firstOperand = null;
+            isNewInput = true;
+            updateDisplay();
+        }
+
+        function toggleSign() {
+            currentInput = (parseFloat(currentInput) * -1).toString();
+            updateDisplay();
+        }
+
+        function calculateResult() {
+            if (operator && firstOperand !== null) {
+                const secondOperand = parseFloat(currentInput);
+                let result = 0;
+                try {
+                    switch (operator) {
+                        case '+':
+                            result = firstOperand + secondOperand;
+                            break;
+                        case '-':
+                            result = firstOperand - secondOperand;
+                            break;
+                        case '*':
+                            result = firstOperand * secondOperand;
+                            break;
+                        case '/':
+                            if (secondOperand === 0) {
+                                currentInput = 'Error';
+                                updateDisplay();
+                                return;
+                            }
+                            result = firstOperand / secondOperand;
+                            break;
+                        case '%':
+                            result = firstOperand % secondOperand;
+                            break;
+                        default:
+                            return;
+                    }
+                    currentInput = result.toString();
+                    operator = null;
+                    firstOperand = null;
+                    isNewInput = true;
+                    updateDisplay();
+                } catch (e) {
+                    currentInput = 'Error';
+                    updateDisplay();
+                }
+            }
+        }
+
+        const operatorButtons = ['+', '-', '*', '/', '%'];
+        operatorButtons.forEach(op => {
+            const button = document.querySelector(`[onclick="appendInput('${op}')"]`);
+            if (button) {
+                button.onclick = () => {
+                    if (firstOperand === null) {
+                        firstOperand = parseFloat(currentInput);
+                        operator = op;
+                        isNewInput = true;
+                    } else {
+                        calculateResult();
+                        firstOperand = parseFloat(currentInput);
+                        operator = op;
+                        isNewInput = true;
+                    }
+                };
+            }
+        });
+
+        // Initial display update
+        updateDisplay();
+    </script>
+</body>
+</html>

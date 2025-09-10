@@ -1,0 +1,198 @@
+*{
+  margin: 0;
+  padding: 0;
+ box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+width: 100%;
+}
+#main{
+  height: 100%;
+  width: 100%;
+ 
+}
+#header{
+  height: 13%;
+  width: 100%;
+   display: flex;
+  position: fixed;
+  align-items: center;
+  background-color: white;
+  color: blue;
+  font: "gill sans";  
+  justify-content: space-around;
+}
+#content{
+  height: 75%;
+  width: 100%;
+
+display: flex;
+justify-content: space-around;
+align-items: center;
+
+}
+#box1{
+  height: 90%;
+  width: 47%;
+  background-color: white;
+}
+#box1 h1{
+  font-size: 50px;
+  font-weight: 600;
+  color: darkblue;
+  margin: 30px 10px;
+}
+#box1 p{
+  font-size: 20px;
+  font-weight: 300;
+  color: black;
+  margin: 30px 10px;
+}
+#btns{
+  display: flex;
+}
+#btns1{
+  text-align: center;
+  background-color: rgb(167, 158, 158);
+  width: 23%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 10px;
+ 
+}
+#btns1:hover{
+  background-color: Red;
+ 
+}
+#btns2{
+  width: 23%;
+  color: rgb(5, 152, 201);
+  border: 2px solid rgb(5, 152, 201);
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+  
+}
+#btns2:hover{
+  color: darkblue;
+  border-color: darkblue;
+
+}
+
+#box2{
+  height: 90%;
+  width: 47%;
+  background-color: lightblue;
+}
+#box2 img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+#box2 video{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+#heading{
+background-color: white;
+  height: 17%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: darkblue;
+
+}
+#heading h1{
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+#contact{
+  text-align: center;
+}
+.text:hover{
+  color: rgb(178, 126, 67);
+ 
+}
+.icon:hover{
+  background-color: aqua;
+}
+.icon{
+  border-radius: 30%;
+}
+#fakeheader{
+  height: 13%;
+  width: 100%;
+}
+#page1{
+  height: 87%;
+  width: 100%;
+  background-color: white
+}
+#stripe{
+  height: 8%;
+  width: 100%;
+  background-color: darkblue;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+#stripe p{
+  font-weight: 600;
+  text-align: center;
+  margin-right: 20px;
+}
+#stripe u:hover{
+  text-underline-offset: 1000px;
+}
+#page2{
+  height: 87%;
+  width: 100%;
+  background-color: lightgreen;
+}
+#try{
+  background-color: green;
+  padding:  10px 20px;
+  color: white
+}
+#try:hover{
+  background-color: darkgreen;
+}
+#boxes{
+ display: flex;
+  justify-content:center; 
+  align-items: center;
+  height: 80%;
+  width: 100%;
+  background-color: blueviolet;
+  
+}
+.box{
+  height: 400px;
+  width: 250px;
+  margin: 30px;
+  background-color: rgb(169, 36, 36);
+  font-size: 2rem;
+  font-weight: bold;
+  color: darkblue;
+  border-radius: 5%;
+
+}
+#b1 img{
+  height: 100%;
+  width: 100%;
+  object-fit: upper cover;
+  border-radius: 5%;
+
+
+
+}
+a{
+  color:white;
+}

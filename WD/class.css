@@ -1,0 +1,15 @@
+*{
+  margin: 1%;
+  padding: 1%;
+}
+html,body {                          
+  height: 100%;
+  width: 100%;
+  background-color: aqua;
+}
+.front{
+
+  color: rgb(249, 18, 95);
+  text-align: center;
+  background-color: black;
+}
